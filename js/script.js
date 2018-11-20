@@ -72,6 +72,7 @@ function removeStyles(list) {
 }
 
 // Calculate number of buttons
+// Calculate number of buttons
 function buttons(list) {
   // Check for residual
   let helper = list.length - parseInt(list.length / number) * number;
@@ -81,6 +82,8 @@ function buttons(list) {
   } else if (helper > 0 && helper < list.length) {
     pages = parseInt(list.length / number) + 1;
   } else if (helper >= list.length) {
+    pages = 0;
+  } else if (helper === 0 && number === list.length) {
     pages = 0;
   }
   return pages;
@@ -155,9 +158,12 @@ function showPage(list, page, number) {
 ***/
 
 function appendPageLinks(students) {
-  // remove old ul if exists
-  for (let i = 0; i < pageLis.children.length; i++) {
-    pageLis.removeChild(pageLis.children[i]);
+  // remove old ul li if exists
+  if (document.querySelector(".pagination")) {
+    let actLis = document.querySelector(".pagination");
+    for (let i = 0; i < actLis.children.length; i++) {
+      actLis.removeChild(pageLis.children[i]);
+    }
   }
   // remove old buttons if necessary
   lis = "";
